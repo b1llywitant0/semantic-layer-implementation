@@ -1,5 +1,5 @@
 services:
- dibimbing-dataeng-spark-master:
+ finpro-spark-master:
   container_name: ${SPARK_MASTER_CONTAINER_NAME}
   hostname: ${SPARK_MASTER_HOST_NAME}
   image: dataeng-dibimbing/spark
@@ -17,7 +17,7 @@ services:
    - ${SPARK_MASTER_UI}:8080
    - ${SPARK_MASTER_PORT}:7077
 
- dibimbing-dataeng-spark-worker-1: &worker_default
+ finpro-spark-worker-1: &worker_default
   container_name: ${SPARK_WORKER_CONTAINER_NAME}-1
   image: dataeng-dibimbing/spark
   environment:
@@ -34,13 +34,9 @@ services:
    - ../scripts:/scripts
    - ../logs:/tmp
   depends_on:
-   - dibimbing-dataeng-spark-master
-
- # dibimbing-dataeng-spark-worker-2:
- #   <<: *worker_default
- #   container_name: ${SPARK_WORKER_CONTAINER_NAME}-2
+   - finpro-spark-master
 
 networks:
  default:
-  name: dataeng-network
+  name: finpro-network
   external: true

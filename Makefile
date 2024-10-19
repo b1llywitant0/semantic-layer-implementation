@@ -1,9 +1,9 @@
 include .env
 
 help:
-	@echo "## docker-build			- Build Docker Images (amd64) including its inter-container network."
-	@echo "## postgres			- Run a Postgres container  "
-	@echo "## spark			- Run a Spark cluster, rebuild the postgres container, then create the destination tables "
+	@echo "## docker-build		- Build Docker Images (amd64) including its inter-container network."
+	@echo "## postgres			- Run a Postgres container."
+	@echo "## spark			- Run a Spark cluster, rebuild the postgres container, then create the destination tables."
 	@echo "## airflow			- Spinup airflow scheduler and webserver."
 	@echo "## datahub			- Spinup datahub instances."
 	@echo "## metabase			- Spinup metabase instance."
@@ -12,16 +12,13 @@ help:
 docker-build:
 	@echo '__________________________________________________________'
 	@echo 'Building Docker Images ...'
-	@echo '__________________________________________________________'
 	@chmod 777 logs/
-	@chmod 777 notebooks/
-	@docker network inspect dataeng-network >/dev/null 2>&1 || docker network create dataeng-network
+	@echo '__________________________________________________________'
+	@docker network inspect finpro-network >/dev/null 2>&1 || docker network create finpro-network
 	@echo '__________________________________________________________'
 	@docker build -t dataeng-dibimbing/spark -f ./docker/Dockerfile.spark .
 	@echo '__________________________________________________________'
 	@docker build -t dataeng-dibimbing/airflow -f ./docker/Dockerfile.airflow .
-	@echo '__________________________________________________________'
-	@docker build -t dataeng-dibimbing/jupyter -f ./docker/Dockerfile.jupyter .
 	@echo '==========================================================='
 
 spark:
@@ -35,7 +32,7 @@ airflow:
 	@echo '__________________________________________________________'
 	@echo 'Creating Airflow Instance ...'
 	@echo '__________________________________________________________'
-	@docker compose -f ./docker/docker-compose-airflow.yml --env-file .env up
+	@docker compose -f ./docker/docker-compose-airflow.yml --env-file .env up -d
 	@echo '==========================================================='
 
 postgres: postgres-create postgres-create-warehouse postgres-create-table postgres-ingest-csv
@@ -49,14 +46,14 @@ postgres-create:
 		echo 'Postgres Account	: ${POSTGRES_USER}' &&\
 		echo 'Postgres password	: ${POSTGRES_PASSWORD}' &&\
 		echo 'Postgres Db		: ${POSTGRES_DW_DB}'
-	@sleep 5
 	@echo '==========================================================='
+	@sleep 5
 
 postgres-create-table:
 	@echo '__________________________________________________________'
 	@echo 'Creating tables...'
 	@echo '_________________________________________'
-	@docker exec -it ${POSTGRES_CONTAINER_NAME} psql -U ${POSTGRES_USER} -d ${POSTGRES_DW_DB} -f sql/create-tables.sql
+	@docker exec -it ${POSTGRES_CONTAINER_NAME} psql -U ${POSTGRES_USER} -d ${POSTGRES_DW_DB} -f sql/tables-ddl.sql
 	@echo '==========================================================='
 
 postgres-ingest-csv:
@@ -68,9 +65,9 @@ postgres-ingest-csv:
 
 postgres-create-warehouse:
 	@echo '__________________________________________________________'
-	@echo 'Creating Warehouse DB...'
+	@echo 'Creating Ecommerce DB...'
 	@echo '_________________________________________'
-	@docker exec -it ${POSTGRES_CONTAINER_NAME} psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -f sql/warehouse-ddl.sql
+	@docker exec -it ${POSTGRES_CONTAINER_NAME} psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -f sql/ecommerce-ddl.sql
 	@echo '==========================================================='
 
 datahub-create:
@@ -95,8 +92,8 @@ metabase: postgres-create-warehouse
 	@echo '==========================================================='
 
 clean:
-	@bash ./scripts/goodnight.sh
+	"C:/Program Files/Git/bin/bash.exe" ./scripts/goodnight.sh
 
 
 postgres-bash:
-	@docker exec -it dataeng-postgres bash
+	@docker exec -it finpro-postgres bash

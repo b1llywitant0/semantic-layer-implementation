@@ -162,7 +162,7 @@ services:
     volumes:
       - zkdata:/var/lib/zookeeper
 networks:
-  dataeng-network:
+  finpro-network:
     driver: bridge
     external: true
 version: '2.3'

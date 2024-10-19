@@ -1,12 +1,12 @@
 #!/bin/bash
-if [[   $(docker ps --filter name=dataeng* -aq) ]]; then
+if [[   $(docker ps --filter name=finpro* -aq) ]]; then
     echo 'Stopping Container...'
-    docker ps --filter name=dataeng* -aq | xargs docker stop
+    docker ps --filter name=finpro* -aq | xargs docker stop
     echo 'All Container Stopped...'
     echo 'Removing Container...'
-    docker ps --filter name=dataeng* -aq | xargs docker rm
+    docker ps --filter name=finpro* -aq | xargs docker rm
     echo 'All Container Removed...'
-    docker network inspect dataeng-network >/dev/null 2>&1
+    docker network inspect finpro-network 2>nul
 else
     echo "All Cleaned UP!"
 fi

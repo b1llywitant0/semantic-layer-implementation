@@ -36,5 +36,5 @@ services:
 
 networks:
   default:
-    name: dataeng-network
+    name: finpro-network
     external: true
