@@ -32,5 +32,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   semantic_dbt:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    staging:
+      +materialized: table
+    marketing:
+      +materialized: view
+    app:
       +materialized: view

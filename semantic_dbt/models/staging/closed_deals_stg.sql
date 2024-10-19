@@ -1,5 +1,3 @@
-{{config(materialized='table')}}
-
 SELECT 
 	cd.mql_id,
 	cd.seller_id,

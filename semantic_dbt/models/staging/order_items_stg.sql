@@ -1,5 +1,3 @@
-{{config(materialized='table')}}
-
 SELECT
 	oi.order_id,
 	oi.product_id,

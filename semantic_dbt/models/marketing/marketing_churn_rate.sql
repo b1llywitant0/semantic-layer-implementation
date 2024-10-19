@@ -1,5 +1,3 @@
-{{config(materialized='table')}}
-
 SELECT 
 	mtcd.year_won,
 	mtcd.month_won,
