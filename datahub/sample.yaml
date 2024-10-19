@@ -3,9 +3,9 @@ source:
   type: "postgres"
   config:
     host_port: localhost
-    database: postgres_db
+    database: ecommerce
     username: user
-    password: password
+    password: admin123
     include_tables: true
     include_views: true
     profiling:

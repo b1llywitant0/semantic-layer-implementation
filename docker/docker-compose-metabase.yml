@@ -2,7 +2,7 @@ version: '2'
 
 services:
   metabase:
-    image: finpro/metabase:v0.47.3
+    image: metabase/metabase:v0.47.3
     container_name: ${METABASE_CONTAINER_NAME}
     ports:
       - "${METABASE_PORT}:3000"
@@ -16,7 +16,7 @@ services:
     restart: always
   
   metabase-setup:
-    image: finpro/bash:5.1.16
+    image: bash:5.1.16
     container_name: metabase-setup
     volumes:
       - ../scripts:/tmp

@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   finpro-postgres:
-    image: finpro/postgres
+    image: postgres
     container_name: ${POSTGRES_CONTAINER_NAME}
     restart: unless-stopped
     hostname: ${POSTGRES_CONTAINER_NAME}
@@ -18,7 +16,7 @@ services:
       - ../data:/data
     ports:
       - ${POSTGRES_PORT}:5432
-
+        
 networks:
   finpro-network:
     driver: bridge

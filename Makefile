@@ -37,6 +37,14 @@ airflow:
 	@docker compose -f ./docker/docker-compose-airflow.yml --env-file .env up -d
 	@echo '==========================================================='
 
+# dbt-run:
+# 	@docker run \
+# 	--network=finpro-network \
+# 	--mount type=bind,source="C:/Users/Chinki Lengkong/Documents/Projects/semantic-layer-implementation",target=/usr/app \
+# 	--mount type=bind,source="C:/Users/Chinki Lengkong/.dbt/profiles.yml",target=/root/.dbt/ \
+# 	finpro/dbt \
+# 	ls
+
 postgres: postgres-create postgres-create-warehouse postgres-create-table postgres-ingest-csv
 
 postgres-create:
@@ -95,7 +103,6 @@ metabase: postgres-create-warehouse
 
 clean:
 	"C:/Program Files/Git/bin/bash.exe" ./scripts/goodnight.sh
-
 
 postgres-bash:
 	@docker exec -it finpro-postgres bash

@@ -21,6 +21,7 @@ services:
       - ../logs:/opt/airflow/logs
       - ../spark-scripts:/spark-scripts
       - ../scripts:/scripts
+      - ../semantic_dbt:/opt/airflow/dbt
 
   webserver:
     image: finpro/airflow
@@ -45,6 +46,7 @@ services:
       - ../logs:/opt/airflow/logs
       - ../spark-scripts:/spark-scripts
       - ../scripts:/scripts
+      - ../semantic_dbt:/opt/airflow/dbt
     ports:
       - ${AIRFLOW_WEBSERVER_PORT}:8080
 
