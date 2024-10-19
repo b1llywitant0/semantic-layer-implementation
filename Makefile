@@ -16,9 +16,11 @@ docker-build:
 	@echo '__________________________________________________________'
 	@docker network inspect finpro-network >/dev/null 2>&1 || docker network create finpro-network
 	@echo '__________________________________________________________'
-	@docker build -t dataeng-dibimbing/spark -f ./docker/Dockerfile.spark .
+	@docker build -t finpro/spark -f ./docker/Dockerfile.spark .
 	@echo '__________________________________________________________'
-	@docker build -t dataeng-dibimbing/airflow -f ./docker/Dockerfile.airflow .
+	@docker build -t finpro/airflow -f ./docker/Dockerfile.airflow .
+	@echo '__________________________________________________________'
+	@docker build -t finpro/dbt -f ./docker/Dockerfile.dbt .
 	@echo '==========================================================='
 
 spark:

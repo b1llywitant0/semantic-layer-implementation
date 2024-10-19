@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   scheduler:
-    image: dataeng-dibimbing/airflow
+    image: finpro/airflow
     container_name: ${AIRFLOW_SCHEDULER_CONTAINER_NAME}
     hostname: ${AIRFLOW_SCHEDULER_CONTAINER_NAME}
     command: scheduler
@@ -23,7 +23,7 @@ services:
       - ../scripts:/scripts
 
   webserver:
-    image: dataeng-dibimbing/airflow
+    image: finpro/airflow
     container_name: ${AIRFLOW_WEBSERVER_CONTAINER_NAME}
     hostname: ${AIRFLOW_WEBSERVER_CONTAINER_NAME}
     entrypoint: /scripts/entrypoint.sh

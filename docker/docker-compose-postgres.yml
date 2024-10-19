@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   finpro-postgres:
-    image: postgres:11
+    image: finpro/postgres
     container_name: ${POSTGRES_CONTAINER_NAME}
     restart: unless-stopped
     hostname: ${POSTGRES_CONTAINER_NAME}
