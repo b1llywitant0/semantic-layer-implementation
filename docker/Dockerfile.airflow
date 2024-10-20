@@ -15,6 +15,7 @@ RUN export JAVA_HOME
 USER airflow
 
 RUN pip install \
+    apache-airflow-providers-postgres \
     lxml \
     pyspark==3.3.2 \
     apache-airflow-providers-apache-spark \
@@ -25,3 +26,4 @@ RUN pip install \
     sqlalchemy-bigquery==1.6.1
 
 COPY --chown=airflow:root ./dags /opt/airflow/dags
+

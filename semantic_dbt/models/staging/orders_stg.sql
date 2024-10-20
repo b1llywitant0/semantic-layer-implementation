@@ -1,11 +1,3 @@
-{{
-  config(
-	post_hook=[
-      "CREATE INDEX IF NOT EXISTS idx_orders_customer_id ON {{ this }} (customer_id)"
-    ]
-  )
-}}
-
 SELECT 
 	o.order_id,
 	o.customer_id,
